@@ -9,9 +9,17 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.smarthome.core.items.GroupItem;
 import org.eclipse.smarthome.core.items.Item;
 import org.eclipse.smarthome.core.items.ItemRegistry;
+import org.eclipse.smarthome.core.library.items.ContactItem;
+import org.eclipse.smarthome.core.library.items.DateTimeItem;
+import org.eclipse.smarthome.core.library.items.ImageItem;
+import org.eclipse.smarthome.core.library.items.LocationItem;
 import org.eclipse.smarthome.core.library.items.NumberItem;
+import org.eclipse.smarthome.core.library.items.PlayerItem;
+import org.eclipse.smarthome.core.library.items.RollershutterItem;
+import org.eclipse.smarthome.core.library.items.StringItem;
 import org.eclipse.smarthome.core.library.items.SwitchItem;
 import org.eclipse.smarthome.core.library.types.OnOffType;
 import org.eclipse.smarthome.core.thing.link.ItemChannelLink;
@@ -75,19 +83,52 @@ public abstract class RuleTest extends JavaOSGiTest {
     protected Item getItem(String itemName) {
         return itemRegistry.get(itemName);
     }
+    
+    private <T extends Item> T itemAs(String itemName, Class<T> clazz) {
+    	Item item = getItem(itemName);
+        assertThat(item, instanceOf(clazz));
+        
+    	return (T) item;
+    }
 
     protected SwitchItem getSwitchItem(String itemName) {
-        Item item = getItem(itemName);
-        assertThat(item, instanceOf(SwitchItem.class));
+        return itemAs(itemName, SwitchItem.class);
+    }
 
-        return (SwitchItem) item;
+    protected NumberItem getNumberItem(String itemName) {
+    	return itemAs(itemName, NumberItem.class);
     }
     
-    protected NumberItem getNumberItem(String itemName) {
-    	Item item = getItem(itemName);
-    	assertThat(item, instanceOf(NumberItem.class));
-    	
-    	return (NumberItem) item;
+    protected GroupItem getGroupItem(String itemName) {
+    	return itemAs(itemName, GroupItem.class);
+    }
+    
+    protected ContactItem getContactItem(String itemName) {
+    	return itemAs(itemName, ContactItem.class);
+    }
+
+    protected DateTimeItem getDateTimeItem(String itemName) {
+    	return itemAs(itemName, DateTimeItem.class);
+    }
+
+    protected ImageItem getImageItem(String itemName) {
+    	return itemAs(itemName, ImageItem.class);
+    }
+
+    protected LocationItem getLocationItem(String itemName) {
+    	return itemAs(itemName, LocationItem.class);
+    }
+
+    protected PlayerItem getPlayerItem(String itemName) {
+    	return itemAs(itemName, PlayerItem.class);
+    }
+
+    protected RollershutterItem getRollershutterItem(String itemName) {
+    	return itemAs(itemName, RollershutterItem.class);
+    }
+
+    protected StringItem getStringItem(String itemName) {
+    	return itemAs(itemName, StringItem.class);
     }
 
     protected List<String> requestedItems() {
