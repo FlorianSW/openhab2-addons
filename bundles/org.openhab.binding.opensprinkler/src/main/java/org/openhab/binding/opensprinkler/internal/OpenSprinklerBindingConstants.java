@@ -94,68 +94,119 @@ public class OpenSprinklerBindingConstants {
     public static final String STATION_47 = "station47";
     public static final String STATION_48 = "station48";
 
+    public static final String STATION_DURATION_01 = "station01Duration";
+    public static final String STATION_DURATION_02 = "station02Duration";
+    public static final String STATION_DURATION_03 = "station03Duration";
+    public static final String STATION_DURATION_04 = "station04Duration";
+    public static final String STATION_DURATION_05 = "station05Duration";
+    public static final String STATION_DURATION_06 = "station06Duration";
+    public static final String STATION_DURATION_07 = "station07Duration";
+    public static final String STATION_DURATION_08 = "station08Duration";
+    public static final String STATION_DURATION_09 = "station09Duration";
+    public static final String STATION_DURATION_10 = "station10Duration";
+    public static final String STATION_DURATION_11 = "station11Duration";
+    public static final String STATION_DURATION_12 = "station12Duration";
+    public static final String STATION_DURATION_13 = "station13Duration";
+    public static final String STATION_DURATION_14 = "station14Duration";
+    public static final String STATION_DURATION_15 = "station15Duration";
+    public static final String STATION_DURATION_16 = "station16Duration";
+    public static final String STATION_DURATION_17 = "station17Duration";
+    public static final String STATION_DURATION_18 = "station18Duration";
+    public static final String STATION_DURATION_19 = "station19Duration";
+    public static final String STATION_DURATION_20 = "station20Duration";
+    public static final String STATION_DURATION_21 = "station21Duration";
+    public static final String STATION_DURATION_22 = "station22Duration";
+    public static final String STATION_DURATION_23 = "station23Duration";
+    public static final String STATION_DURATION_24 = "station24Duration";
+    public static final String STATION_DURATION_25 = "station25Duration";
+    public static final String STATION_DURATION_26 = "station26Duration";
+    public static final String STATION_DURATION_27 = "station27Duration";
+    public static final String STATION_DURATION_28 = "station28Duration";
+    public static final String STATION_DURATION_29 = "station29Duration";
+    public static final String STATION_DURATION_30 = "station30Duration";
+    public static final String STATION_DURATION_31 = "station31Duration";
+    public static final String STATION_DURATION_32 = "station32Duration";
+    public static final String STATION_DURATION_33 = "station33Duration";
+    public static final String STATION_DURATION_34 = "station34Duration";
+    public static final String STATION_DURATION_35 = "station35Duration";
+    public static final String STATION_DURATION_36 = "station36Duration";
+    public static final String STATION_DURATION_37 = "station37Duration";
+    public static final String STATION_DURATION_38 = "station38Duration";
+    public static final String STATION_DURATION_39 = "station39Duration";
+    public static final String STATION_DURATION_40 = "station40Duration";
+    public static final String STATION_DURATION_41 = "station41Duration";
+    public static final String STATION_DURATION_42 = "station42Duration";
+    public static final String STATION_DURATION_43 = "station43Duration";
+    public static final String STATION_DURATION_44 = "station44Duration";
+    public static final String STATION_DURATION_45 = "station45Duration";
+    public static final String STATION_DURATION_46 = "station46Duration";
+    public static final String STATION_DURATION_47 = "station47Duration";
+    public static final String STATION_DURATION_48 = "station48Duration";
+
     /**
      * Enumeration of station constants for mapping station channel names to ints and back.
      *
      * @author CrackerStealth
      */
     public enum Station {
-        STATION01(0, STATION_01),
-        STATION02(1, STATION_02),
-        STATION03(2, STATION_03),
-        STATION04(3, STATION_04),
-        STATION05(4, STATION_05),
-        STATION06(5, STATION_06),
-        STATION07(6, STATION_07),
-        STATION08(7, STATION_08),
-        STATION09(8, STATION_09),
-        STATION10(9, STATION_10),
-        STATION11(10, STATION_11),
-        STATION12(11, STATION_12),
-        STATION13(12, STATION_13),
-        STATION14(13, STATION_14),
-        STATION15(14, STATION_15),
-        STATION16(15, STATION_16),
-        STATION17(16, STATION_17),
-        STATION18(17, STATION_18),
-        STATION19(18, STATION_19),
-        STATION20(19, STATION_20),
-        STATION21(20, STATION_21),
-        STATION22(21, STATION_22),
-        STATION23(22, STATION_23),
-        STATION24(23, STATION_24),
-        STATION25(24, STATION_25),
-        STATION26(25, STATION_26),
-        STATION27(26, STATION_27),
-        STATION28(27, STATION_28),
-        STATION29(28, STATION_29),
-        STATION30(29, STATION_30),
-        STATION31(30, STATION_31),
-        STATION32(31, STATION_32),
-        STATION33(32, STATION_33),
-        STATION34(33, STATION_34),
-        STATION35(34, STATION_35),
-        STATION36(35, STATION_36),
-        STATION37(36, STATION_37),
-        STATION38(37, STATION_38),
-        STATION39(38, STATION_39),
-        STATION40(39, STATION_40),
-        STATION41(40, STATION_41),
-        STATION42(41, STATION_42),
-        STATION43(42, STATION_43),
-        STATION44(43, STATION_44),
-        STATION45(44, STATION_45),
-        STATION46(45, STATION_46),
-        STATION47(46, STATION_47),
-        STATION48(47, STATION_48),
-        SENSORRAIN(-1, SENSOR_RAIN);
+        STATION01(0, STATION_01, STATION_DURATION_01),
+        STATION02(1, STATION_02, STATION_DURATION_02),
+        STATION03(2, STATION_03, STATION_DURATION_03),
+        STATION04(3, STATION_04, STATION_DURATION_04),
+        STATION05(4, STATION_05, STATION_DURATION_05),
+        STATION06(5, STATION_06, STATION_DURATION_06),
+        STATION07(6, STATION_07, STATION_DURATION_07),
+        STATION08(7, STATION_08, STATION_DURATION_08),
+        STATION09(8, STATION_09, STATION_DURATION_09),
+        STATION10(9, STATION_10, STATION_DURATION_10),
+        STATION11(10, STATION_11, STATION_DURATION_11),
+        STATION12(11, STATION_12, STATION_DURATION_12),
+        STATION13(12, STATION_13, STATION_DURATION_13),
+        STATION14(13, STATION_14, STATION_DURATION_14),
+        STATION15(14, STATION_15, STATION_DURATION_15),
+        STATION16(15, STATION_16, STATION_DURATION_16),
+        STATION17(16, STATION_17, STATION_DURATION_17),
+        STATION18(17, STATION_18, STATION_DURATION_18),
+        STATION19(18, STATION_19, STATION_DURATION_19),
+        STATION20(19, STATION_20, STATION_DURATION_20),
+        STATION21(20, STATION_21, STATION_DURATION_21),
+        STATION22(21, STATION_22, STATION_DURATION_22),
+        STATION23(22, STATION_23, STATION_DURATION_23),
+        STATION24(23, STATION_24, STATION_DURATION_24),
+        STATION25(24, STATION_25, STATION_DURATION_25),
+        STATION26(25, STATION_26, STATION_DURATION_26),
+        STATION27(26, STATION_27, STATION_DURATION_27),
+        STATION28(27, STATION_28, STATION_DURATION_28),
+        STATION29(28, STATION_29, STATION_DURATION_29),
+        STATION30(29, STATION_30, STATION_DURATION_30),
+        STATION31(30, STATION_31, STATION_DURATION_31),
+        STATION32(31, STATION_32, STATION_DURATION_32),
+        STATION33(32, STATION_33, STATION_DURATION_33),
+        STATION34(33, STATION_34, STATION_DURATION_34),
+        STATION35(34, STATION_35, STATION_DURATION_35),
+        STATION36(35, STATION_36, STATION_DURATION_36),
+        STATION37(36, STATION_37, STATION_DURATION_37),
+        STATION38(37, STATION_38, STATION_DURATION_38),
+        STATION39(38, STATION_39, STATION_DURATION_39),
+        STATION40(39, STATION_40, STATION_DURATION_40),
+        STATION41(40, STATION_41, STATION_DURATION_41),
+        STATION42(41, STATION_42, STATION_DURATION_42),
+        STATION43(42, STATION_43, STATION_DURATION_43),
+        STATION44(43, STATION_44, STATION_DURATION_44),
+        STATION45(44, STATION_45, STATION_DURATION_45),
+        STATION46(45, STATION_46, STATION_DURATION_46),
+        STATION47(46, STATION_47, STATION_DURATION_47),
+        STATION48(47, STATION_48, STATION_DURATION_48),
+        SENSORRAIN(-1, SENSOR_RAIN, SENSOR_RAIN);
 
         private final int number;
         private final String id;
+        private final String durationId;
 
-        private Station(final int number, final String id) {
+        private Station(final int number, final String id, final String durationId) {
             this.number = number;
             this.id = id;
+            this.durationId = durationId;
         }
 
         @Override
@@ -179,7 +230,7 @@ public class OpenSprinklerBindingConstants {
 
         public static Station get(String valueSelectorText) throws IllegalArgumentException {
             for (Station c : Station.values()) {
-                if (c.id.equals(valueSelectorText)) {
+                if (c.id.equals(valueSelectorText) || c.durationId.equals(valueSelectorText)) {
                     return c;
                 }
             }

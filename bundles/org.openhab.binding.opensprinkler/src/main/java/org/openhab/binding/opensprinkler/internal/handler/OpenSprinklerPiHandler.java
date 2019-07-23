@@ -16,6 +16,7 @@ import static org.openhab.binding.opensprinkler.internal.OpenSprinklerBindingCon
 
 import java.util.concurrent.TimeUnit;
 
+import org.eclipse.smarthome.core.storage.StorageService;
 import org.eclipse.smarthome.core.thing.ChannelUID;
 import org.eclipse.smarthome.core.thing.Thing;
 import org.eclipse.smarthome.core.thing.ThingStatus;
@@ -38,8 +39,8 @@ public class OpenSprinklerPiHandler extends OpenSprinklerHandler {
 
     private OpenSprinklerPiConfig openSprinklerConfig = null;
 
-    public OpenSprinklerPiHandler(Thing thing) {
-        super(thing);
+    public OpenSprinklerPiHandler(Thing thing, StorageService storageService) {
+        super(thing, storageService);
     }
 
     @Override

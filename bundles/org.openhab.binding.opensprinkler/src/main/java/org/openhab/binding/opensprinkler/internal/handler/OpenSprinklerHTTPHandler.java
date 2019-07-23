@@ -17,6 +17,7 @@ import static org.openhab.binding.opensprinkler.internal.OpenSprinklerBindingCon
 import java.util.concurrent.TimeUnit;
 
 import org.eclipse.smarthome.core.library.types.OnOffType;
+import org.eclipse.smarthome.core.storage.StorageService;
 import org.eclipse.smarthome.core.thing.ChannelUID;
 import org.eclipse.smarthome.core.thing.Thing;
 import org.eclipse.smarthome.core.thing.ThingStatus;
@@ -39,8 +40,8 @@ public class OpenSprinklerHTTPHandler extends OpenSprinklerHandler {
 
     private OpenSprinklerConfig openSprinklerConfig = null;
 
-    public OpenSprinklerHTTPHandler(Thing thing) {
-        super(thing);
+    public OpenSprinklerHTTPHandler(Thing thing, StorageService storageService) {
+        super(thing, storageService);
     }
 
     @Override

@@ -12,6 +12,8 @@
  */
 package org.openhab.binding.opensprinkler.internal.api;
 
+import java.math.BigDecimal;
+
 /**
  * The {@link OpenSprinklerApi} interface defines the functions which are
  * controllable on the OpenSprinkler API interface.
@@ -47,6 +49,15 @@ public interface OpenSprinklerApi {
      * @throws Exception
      */
     public abstract void openStation(int station) throws Exception;
+
+    /**
+     * Starts a station on the OpenSprinkler device for the specified duration
+     *
+     * @param station Index of the station to open starting at 0.
+     * @param duration The duration in seconds for how long the station should be turned on.
+     * @throws Exception
+     */
+    public abstract void openStation(int station, BigDecimal duration) throws Exception;
 
     /**
      * Closes a station on the OpenSprinkler device.

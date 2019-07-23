@@ -14,6 +14,8 @@ package org.openhab.binding.opensprinkler.internal.api;
 
 import static org.openhab.binding.opensprinkler.internal.api.OpenSprinklerApiConstants.*;
 
+import java.math.BigDecimal;
+
 import org.openhab.binding.opensprinkler.internal.api.exception.CommunicationApiException;
 import org.openhab.binding.opensprinkler.internal.api.exception.DataFormatErrorApiException;
 import org.openhab.binding.opensprinkler.internal.api.exception.DataMissingApiException;
@@ -79,6 +81,11 @@ public class OpenSprinklerHttpApiV210 extends OpenSprinklerHttpApiV100 {
 
     @Override
     public void openStation(int station) throws Exception {
+        openStation(station, CMD_STATION_ENABLE_TIME);
+    }
+
+    @Override
+    public void openStation(int station, BigDecimal seconds) throws Exception {
         String returnContent;
 
         if (station < 0 || station >= numberOfStations) {
@@ -88,7 +95,7 @@ public class OpenSprinklerHttpApiV210 extends OpenSprinklerHttpApiV100 {
 
         try {
             returnContent = Http.sendHttpGet(getBaseUrl() + CMD_STATION_CONTROL, getRequestRequiredOptions() + "&"
-                    + CMD_STATION + station + "&" + CMD_STATION_ENABLE + "&" + CMD_STATION_ENABLE_TIME);
+                    + CMD_STATION + station + "&" + CMD_STATION_ENABLE + "&t=" + seconds);
         } catch (Exception exp) {
             throw new CommunicationApiException(
                     "There was a problem in the HTTP communication with the OpenSprinkler API: " + exp.getMessage());

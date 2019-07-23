@@ -14,9 +14,14 @@ package org.openhab.binding.opensprinkler.internal.handler;
 
 import static org.openhab.binding.opensprinkler.internal.OpenSprinklerBindingConstants.DEFAULT_REFRESH_RATE;
 
+import java.math.BigDecimal;
 import java.util.concurrent.ScheduledFuture;
 
+import org.eclipse.smarthome.core.library.types.DecimalType;
 import org.eclipse.smarthome.core.library.types.OnOffType;
+import org.eclipse.smarthome.core.storage.Storage;
+import org.eclipse.smarthome.core.storage.StorageService;
+import org.eclipse.smarthome.core.thing.Channel;
 import org.eclipse.smarthome.core.thing.ChannelUID;
 import org.eclipse.smarthome.core.thing.Thing;
 import org.eclipse.smarthome.core.thing.ThingStatus;
@@ -37,25 +42,35 @@ import org.slf4j.LoggerFactory;
  * @author Chris Graham - Initial contribution
  */
 public abstract class OpenSprinklerHandler extends BaseThingHandler {
+    private static final String STORAGE_NAME = "opensprinkler";
+    private static final String DURATION_PREFIX = "DURATION_";
     private final Logger logger = LoggerFactory.getLogger(OpenSprinklerHandler.class);
 
     protected ScheduledFuture<?> pollingJob;
 
     protected OpenSprinklerApi openSprinklerDevice = null;
+    private StorageService storageService;
 
     protected int refreshInterval = DEFAULT_REFRESH_RATE;
 
-    public OpenSprinklerHandler(Thing thing) {
+    public OpenSprinklerHandler(Thing thing, StorageService storageService) {
         super(thing);
+        this.storageService = storageService;
     }
 
     @Override
     public void handleCommand(ChannelUID channelUID, Command command) {
-        int stationId;
+        int stationId = Station.get(channelUID.getId()).toNumber();
+
+        Channel channel = this.getThing().getChannel(channelUID);
+        if (channel.getChannelTypeUID().getId().equals("duration") && command instanceof DecimalType) {
+            Storage<BigDecimal> storage = this.storageService.getStorage(STORAGE_NAME);
+            storage.put(DURATION_PREFIX + stationId, ((DecimalType) command).toBigDecimal());
+            updateState(channelUID, (DecimalType) command);
+            return;
+        }
 
         try {
-            stationId = Station.get(channelUID.getId()).toNumber();
-
             if (command == RefreshType.REFRESH) {
                 /* A refresh command means we just need to poll OpenSprinkler for current state. */
                 if (stationId == -1) {
@@ -72,7 +87,7 @@ public abstract class OpenSprinklerHandler extends BaseThingHandler {
                     /* A station ID number of -1 means the rain sensor is attempting to be manipulated. */
                     logger.warn("Attempted to change state of the rain sensor. The rain sensor is read-only.");
                 } else {
-                    handleStationCommand(stationId, command);
+                    handleStationCommand(channelUID, stationId, command);
                 }
             }
         } catch (Exception exp) {
@@ -110,10 +125,23 @@ public abstract class OpenSprinklerHandler extends BaseThingHandler {
      * @param stationId Int of the station to control. Starts at 0.
      * @param command Command being issues to the channel.
      */
-    protected void handleStationCommand(int stationId, Command command) {
+    protected void handleStationCommand(ChannelUID channelUID, int stationId, Command command) {
+        BigDecimal timeFrame = null;
+        Storage<BigDecimal> storage = this.storageService.getStorage(STORAGE_NAME);
+        if (storage.containsKey(DURATION_PREFIX + stationId)) {
+            timeFrame = storage.get(DURATION_PREFIX + stationId);
+        }
+        Object timeFrameConfig = this.getThing().getChannel(channelUID).getConfiguration().get("duration");
+        if (timeFrame == null && timeFrameConfig != null && timeFrameConfig instanceof BigDecimal) {
+            timeFrame = (BigDecimal) timeFrameConfig;
+        }
         try {
             if (command == OnOffType.ON) {
-                openSprinklerDevice.openStation(stationId);
+                if (timeFrame != null) {
+                    openSprinklerDevice.openStation(stationId, timeFrame);
+                } else {
+                    openSprinklerDevice.openStation(stationId);
+                }
             } else if (command == OnOffType.OFF) {
                 openSprinklerDevice.closeStation(stationId);
             } else {

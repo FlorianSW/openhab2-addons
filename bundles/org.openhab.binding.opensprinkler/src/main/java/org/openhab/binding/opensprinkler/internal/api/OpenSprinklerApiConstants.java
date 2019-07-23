@@ -12,6 +12,8 @@
  */
 package org.openhab.binding.opensprinkler.internal.api;
 
+import java.math.BigDecimal;
+
 import org.eclipse.jdt.annotation.NonNullByDefault;
 
 import com.pi4j.io.gpio.Pin;
@@ -38,7 +40,7 @@ public class OpenSprinklerApiConstants {
     public static final String CMD_STATION = "sid=";
     public static final String CMD_STATION_ENABLE = "en=1";
     public static final String CMD_STATION_DISABLE = "en=0";
-    public static final String CMD_STATION_ENABLE_TIME = "t=64800";
+    public static final BigDecimal CMD_STATION_ENABLE_TIME = new BigDecimal(64800);
     public static final String CMD_STATION_ENABLE_TIME_UNLIMITED = "t=0";
 
     public static final String CMD_STATUS_INFO = "jc";

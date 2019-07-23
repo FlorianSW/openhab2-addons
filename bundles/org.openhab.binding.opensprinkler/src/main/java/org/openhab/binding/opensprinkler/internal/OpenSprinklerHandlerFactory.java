@@ -18,6 +18,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.eclipse.smarthome.core.storage.StorageService;
 import org.eclipse.smarthome.core.thing.Thing;
 import org.eclipse.smarthome.core.thing.ThingTypeUID;
 import org.eclipse.smarthome.core.thing.binding.BaseThingHandlerFactory;
@@ -26,6 +27,7 @@ import org.eclipse.smarthome.core.thing.binding.ThingHandlerFactory;
 import org.openhab.binding.opensprinkler.internal.handler.OpenSprinklerHTTPHandler;
 import org.openhab.binding.opensprinkler.internal.handler.OpenSprinklerPiHandler;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * The {@link OpenSprinklerHandlerFactory} is responsible for creating things and thing
@@ -38,6 +40,8 @@ public class OpenSprinklerHandlerFactory extends BaseThingHandlerFactory {
     private static final Set<ThingTypeUID> SUPPORTED_THING_TYPES_UIDS = new HashSet<>(
             Arrays.asList(OPENSPRINKLER_THING, OPENSPRINKLERPI_THING));
 
+    private StorageService storageService;
+
     @Override
     public boolean supportsThingType(ThingTypeUID thingTypeUID) {
         return SUPPORTED_THING_TYPES_UIDS.contains(thingTypeUID);
@@ -48,11 +52,16 @@ public class OpenSprinklerHandlerFactory extends BaseThingHandlerFactory {
         ThingTypeUID thingTypeUID = thing.getThingTypeUID();
 
         if (thingTypeUID.equals(OPENSPRINKLER_THING)) {
-            return new OpenSprinklerHTTPHandler(thing);
+            return new OpenSprinklerHTTPHandler(thing, storageService);
         } else if (thingTypeUID.equals(OPENSPRINKLERPI_THING)) {
-            return new OpenSprinklerPiHandler(thing);
+            return new OpenSprinklerPiHandler(thing, storageService);
         }
 
         return null;
+    }
+
+    @Reference
+    public void setStorageService(StorageService storageService) {
+        this.storageService = storageService;
     }
 }

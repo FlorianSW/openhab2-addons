@@ -14,6 +14,8 @@ package org.openhab.binding.opensprinkler.internal.api;
 
 import static org.openhab.binding.opensprinkler.internal.api.OpenSprinklerApiConstants.*;
 
+import java.math.BigDecimal;
+
 import org.openhab.binding.opensprinkler.internal.api.exception.CommunicationApiException;
 import org.openhab.binding.opensprinkler.internal.api.exception.GeneralApiException;
 import org.openhab.binding.opensprinkler.internal.util.Http;
@@ -98,13 +100,18 @@ public class OpenSprinklerHttpApiV100 implements OpenSprinklerApi {
 
     @Override
     public void openStation(int station) throws Exception {
+        openStation(station, new BigDecimal(64800));
+    }
+
+    @Override
+    public void openStation(int station, BigDecimal seconds) throws Exception {
         if (station < 0 || station >= numberOfStations) {
             throw new GeneralApiException("This OpenSprinkler device only has " + this.numberOfStations
                     + " but station " + station + " was requested to be opened.");
         }
 
         try {
-            Http.sendHttpGet(getBaseUrl() + "sn" + station + "=1", null);
+            Http.sendHttpGet(getBaseUrl() + "sn" + station + "=1&t=" + seconds, null);
         } catch (Exception exp) {
             throw new CommunicationApiException(
                     "There was a problem in the HTTP communication with the OpenSprinkler API: " + exp.getMessage());

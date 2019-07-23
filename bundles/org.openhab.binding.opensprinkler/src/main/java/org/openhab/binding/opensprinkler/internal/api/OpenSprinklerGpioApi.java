@@ -14,6 +14,8 @@ package org.openhab.binding.opensprinkler.internal.api;
 
 import static org.openhab.binding.opensprinkler.internal.api.OpenSprinklerApiConstants.*;
 
+import java.math.BigDecimal;
+
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioFactory;
 import com.pi4j.io.gpio.GpioPinDigitalOutput;
@@ -80,6 +82,11 @@ public class OpenSprinklerGpioApi implements OpenSprinklerApi {
     @Override
     public void closeConnection() {
         connectionOpen = false;
+    }
+
+    @Override
+    public void openStation(int station, BigDecimal duration) throws Exception {
+        openStation(station);
     }
 
     @Override
